@@ -2,43 +2,26 @@
 
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsDarkMode } from "@/state";
-import { Bell, Icon, LucideIcon, Moon, Sun, Zap } from "lucide-react";
+import { Bell, Moon, Sun, Zap } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface NavbarLinkProps {
   href: string;
-  icon: LucideIcon;
   label: string;
-  isCollapsed: boolean;
 }
 
-const NavBarLink = ({
-  href,
-  icon: Icon,
-  label,
-  isCollapsed,
-}: NavbarLinkProps) => {
+const NavBarLink = ({ href, label }: NavbarLinkProps) => {
   const pathname = usePathname();
   const isActive = pathname === href || (pathname === "/" && href === "/home");
 
   return (
     <Link href={href}>
-      <div
-        className={`cursor-pointer flex items-center ${
-          isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
-        }
-      hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors ${
-        isActive ? "bg-blue-200 text-white" : ""
-      }
-      }`}
-      >
-        <Icon className="w-6 h-6 !text-gray-700" />
+      <div className={`cursor-pointer flex items-center`}>
         <span
-          className={`${
-            isCollapsed ? "hidden" : "block"
-          } font-medium text-gray-700
-        }`}
+          className={`text-xl	font-medium hover:text-gray-900 ${
+            isActive ? "text-gray-900" : "text-gray-400"
+          }`}
         >
           {label}
         </span>
@@ -55,27 +38,22 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex justify-between items-center w-full mb-7">
-      {/* Left */}
+    <div className="flex justify-between items-center w-full my-8 px-96">
+      {/* Left Side*/}
       <div className="flex justify-between items-center gap-5">
         <div>logo</div>
+        <h1 className="hidden lg:flex font-bold text-2xl">BitCloud</h1>
+        <hr className="hidden lg:flex w-0 h-12 border border-solid border-l border-gray-300 mx-3" />
+      </div>
 
-        <h1 className="hidden lg:flex font-extrabold text-2xl">BitCloud</h1>
-
-        <hr className="hidden lg:flex w-0 h-7 border border-solid border-l border-gray-300 mx-3" />
-        <NavBarLink href="/exchange" label="Exchange" />
-        <Link href="/exchange">
-          <h1 className="text-lg text-gray-500">Exchange</h1>
-        </Link>
-        <Link href="/buy">
-          <h1 className="text-lg text-gray-500">Buy Crypto</h1>
-        </Link>
-        <Link href="/market">
-          <h1 className="text-lg text-gray-500">Market</h1>
-        </Link>
-        <Link href="/discover">
-          <h1 className="text-lg text-gray-500">Discover</h1>
-        </Link>
+      <div>
+        {/* LINKS */}
+        <div className="flex justify-between px-32 gap-10">
+          <NavBarLink href="/exchange" label="Exchange" />
+          <NavBarLink href="/buy" label="Buy Crypto" />
+          <NavBarLink href="/market" label="Market" />
+          <NavBarLink href="/discover" label="Discover" />
+        </div>
       </div>
 
       {/* Right */}

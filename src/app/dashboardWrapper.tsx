@@ -5,10 +5,6 @@ import Navbar from "@/app/(components)/Navbar";
 import StoreProvider, { useAppSelector } from "./redux";
 
 const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
-  const isSidebarCollapsed = useAppSelector(
-    (state) => state.global.isSidebarCollapsed
-  );
-
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 
   useEffect(() => {
@@ -25,10 +21,9 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         isDarkMode ? "dark" : "light"
       } flex bg-gray-50 text-gray-900 w-full min-h-screen`}
     >
-      <main
-        className={"flex flex-col w-full h-full py-7 px-9 bg-gray-50 md:pl-24"}
-      >
+      <main className={"flex flex-col w-full h-full bg-gray-50 "}>
         <Navbar />
+        <hr className="w-full h-0 mb-4 border border-solid border-l border-gray-300" />
         {children}
       </main>
     </div>
